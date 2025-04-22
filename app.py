@@ -3,11 +3,33 @@ import pandas as pd
 import numpy as np
 import joblib
 
+# Configuración de página y estilos
+st.set_page_config(page_title="🫀 Predicción de Hipertensión", layout="centered")
+
+# Fondo y diseño personalizado
+st.markdown("""
+    <style>
+    body {
+        background-color: #e6f0ff;
+    }
+    .main {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Imagen médica decorativa
+st.image("obesidad.jpg", caption="Asistente Médico IA", use_container_width=True)
+
+# Título de la app
+st.title("🫀 Predicción de Riesgo de Hipertensión Arterial")
+
 # Cargar el modelo entrenado
 model = joblib.load("model/Adaboost.pkl")
 
-st.title("🫀 Predicción de Riesgo de Hipertensión Arterial")
-
+# Función para capturar inputs del usuario
 def user_input():
     sexo = st.selectbox("Sexo", ["Femenino", "Masculino"])
     edad = st.number_input("Edad", 0.0, 120.0)
@@ -58,7 +80,7 @@ def user_input():
 # Obtener valores del usuario
 valores = user_input()
 
-# Crear DataFrame con los nombres correctos de las columnas
+# Crear DataFrame con nombres de columnas correctos
 columnas = ['sexo', 'edad', 'concentracion_hemoglobina', 'temperatura_ambiente',
             'valor_acido_urico', 'valor_albumina', 'valor_colesterol_hdl',
             'valor_colesterol_ldl', 'valor_colesterol_total', 'valor_creatina',
@@ -74,10 +96,11 @@ columnas = ['sexo', 'edad', 'concentracion_hemoglobina', 'temperatura_ambiente',
 
 df_input = pd.DataFrame(valores, columns=columnas)
 
-# Botón para hacer predicción
+# Botón de predicción
 if st.button("Predecir"):
     pred = model.predict(df_input)[0]
     if pred == 1:
         st.error("⚠️ Riesgo alto de hipertensión arterial.")
     else:
         st.success("✅ No hay riesgo de hipertensión detectado.")
+
