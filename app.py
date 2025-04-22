@@ -103,3 +103,4 @@ if st.button("Predecir"):
         st.error("⚠️ Riesgo alto de hipertensión arterial.")
     else:
         st.success("✅ No hay riesgo de hipertensión detectado.")
+
