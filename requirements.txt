@@ -3,3 +3,4 @@ fastapi
 numpy 
 joblib
 pandas
+boto3
