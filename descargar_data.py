@@ -11,9 +11,7 @@ def create_data_folder():
 
 
 def download_data_from_s3(bucket_name, remote_path, local_path):
-    s3 = boto3.client('s3',
-    aws_access_key_id = secrets.AWS_ACCESS_KEY_ID,
-    aws_secret_access_key= secrets.AWS_SECRET_ACCESS_KEY,)
+    s3 = boto3.client('s3')
     try:
         s3.download_file(bucket_name, remote_path, local_path)
         print(f"Datos descargados desde {bucket_name}/{remote_path} a {local_path}")
