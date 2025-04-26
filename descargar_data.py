@@ -21,8 +21,8 @@ def download_data_from_s3(bucket_name, remote_path, local_path):
 
 if __name__ == "__main__":
     bucket_name = 'samuelstorageformlops2025'
-    remote_path = 'data_scientific/data.csv'
-    local_path = 'data/data.csv'
+    remote_path = 'Hipertension_Arterial_Mexico.csv'
+    local_path = '/data/Hipertension_Arterial_Mexico.csv'
 
     create_data_folder()
     download_data_from_s3(bucket_name, remote_path, local_path)
