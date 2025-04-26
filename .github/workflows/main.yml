@@ -41,14 +41,14 @@ jobs:
           python3 retraining.py
 
       - name: Generating report
+      
         run: |
           echo "## Model metrics" > report.md
           cat metrics.txt >> report.md
-          
-          echo "## Data visualization" >> report.md
-          cml-publish feature_importance.png --md >> report.md
-          
+    
           cml-send-comment report.md
+
+
 
   build_docker_image:
     needs: retraining_model
