@@ -68,6 +68,11 @@ jobs:
 
         run: docker build -t hipertensionv1gsp .
 
+
+      - name: Docker tag
+        run: docker tag hipertensionv1gsp samcfer/hipertensionv1gsp:latest
+
+
       - name: Docker push to Dockerhub
         run: docker push samcfer/hipertensionv1gsp 
 
