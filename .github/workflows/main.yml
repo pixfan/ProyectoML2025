@@ -94,4 +94,4 @@ jobs:
             fi
             
             docker pull ${{ secrets.DOCKER_USERNAME }}/hipertensionv1gsp
-            docker run -d --name hipertensionv1gsp -p 8501:8501 samcfer/hipertensionv1gsp
+            docker run -d --name hipertensionv1gsp -p 80:8501 samcfer/hipertensionv1gsp
