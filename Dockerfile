@@ -22,7 +22,7 @@ COPY requirements.txt .
 
 # Instalar dependencias
 RUN pip install --upgrade pip && pip install -r requirements.txt
-
+RUN pip streamlit
 
 # Copiar el resto del código
 COPY . .
