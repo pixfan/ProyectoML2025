@@ -4,3 +4,4 @@ numpy
 joblib
 pandas
 boto3
+streamlit
