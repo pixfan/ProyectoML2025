@@ -65,10 +65,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
-        run: docker build -t hipertensionv1GSP .
+        run: docker build -t hipertensionv1gsp .
 
       - name: Docker push to Dockerhub
-        run: docker push hipertensionv1GSP
+        run: docker push hipertensionv1gsp 
 
       - name: Login into the server
         run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login -u '${{ secrets.DOCKER_USERNAME }}' --password-stdin
@@ -82,10 +82,10 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             docker login --u '${{secrets.DOCKER_USERNAME}}' --password-stdin '${{secrets.DOCKER_PASSWORD}}'
-            if docker ps --all | grep hipertensionv1GSP; then
-              docker stop hipertensionv1GSP
-              docker rm hipertensionv1GSP
+            if docker ps --all | grep hipertensionv1gsp; then
+              docker stop hipertensionv1gsp
+              docker rm hipertensionv1gsp
             fi
             
-            docker pull ${{ secrets.DOCKER_USERNAME }}/hipertensionv1GSP
-            docker run -d --name hipertensionv1GSP -p 8000:8000 ${{secrets.DOCKER_USERNAME}}/hipertensionv1GSP
+            docker pull ${{ secrets.DOCKER_USERNAME }}/hipertensionv1gsp
+            docker run -d --name hipertensionv1gsp -p 8000:8000 ${{secrets.DOCKER_USERNAME}}/hipertensionv1gsp
