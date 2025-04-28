@@ -69,7 +69,7 @@ jobs:
         run: docker build -t hipertensionv1gsp .
 
       - name: Docker push to Dockerhub
-        run: docker push '${{ secrets.DOCKER_USERNAME }}'/hipertensionv1gsp 
+        run: docker push samcfer/hipertensionv1gsp 
 
       - name: Login into the server
         run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login -u '${{ secrets.DOCKER_USERNAME }}' --password-stdin
@@ -89,4 +89,4 @@ jobs:
             fi
             
             docker pull ${{ secrets.DOCKER_USERNAME }}/hipertensionv1gsp
-            docker run -d --name hipertensionv1gsp -p 8000:8000 ${{secrets.DOCKER_USERNAME}}/hipertensionv1gsp
+            docker run -d --name hipertensionv1gsp -p 8000:8000 samcfer/hipertensionv1gsp
