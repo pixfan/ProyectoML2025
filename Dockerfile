@@ -3,9 +3,19 @@
 # Imagen base
 FROM python:3.12-slim
 
-
-# Carpeta de trabajo
+# Set working directory
 WORKDIR /app
+
+# Install virtualenv
+RUN pip install virtualenv
+
+# Create virtual environment
+RUN virtualenv venv
+
+# Activate virtual environment 
+ENV VIRTUAL_ENV=/app/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
 
 # Copiar dependencias
 COPY requirements.txt .
