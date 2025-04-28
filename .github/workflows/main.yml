@@ -65,10 +65,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
-        run: docker build -t mlops2025 .
+        run: docker build -t hipertensionv1GSP .
 
       - name: Docker push to Dockerhub
-        run: docker push mlops2025
+        run: docker push hipertensionv1GSP
 
       - name: Login into the server
         run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login -u '${{ secrets.DOCKER_USERNAME }}' --password-stdin
@@ -82,10 +82,10 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             docker login --u '${{secrets.DOCKER_USERNAME}}' --password-stdin '${{secrets.DOCKER_PASSWORD}}'
-            if docker ps --all | grep mlops2025; then
-              docker stop mlops2025
-              docker rm smlops2025
+            if docker ps --all | grep hipertensionv1GSP; then
+              docker stop hipertensionv1GSP
+              docker rm hipertensionv1GSP
             fi
             
-            docker pull ${{ secrets.DOCKER_USERNAME }}/mlops2025
-            docker run -d --name mlops2025 -p 8000:8000 ${{secrets.DOCKER_USERNAME}}/mlops2025
+            docker pull ${{ secrets.DOCKER_USERNAME }}/hipertensionv1GSP
+            docker run -d --name hipertensionv1GSP -p 8000:8000 ${{secrets.DOCKER_USERNAME}}/hipertensionv1GSP
