@@ -65,7 +65,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
+
         run: docker build -t hipertensionv1gsp .
+
+      - name: Docker tag Dockerhub
+        run: docker tag hipertensionv1gsp '${{ secrets.DOCKER_USERNAME }}'/hipertensionv1gsp:latest
 
       - name: Docker push to Dockerhub
         run: docker push hipertensionv1gsp 
