@@ -2,12 +2,12 @@ import pandas as pd
 from sklearn.pipeline import Pipeline
 
 import joblib
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.compose import ColumnTransformer, ColumnTransformer
+from sklearn.preprocessing import StandardScaler, StandardScaler
+from sklearn.ensemble import AdaBoostClassifier, AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeClassifier
+from sklearn.model_selection import GridSearchCV, GridSearchCV, train_test_split, train_test_split
+from sklearn.metrics import accuracy_score, accuracy_score, classification_report, classification_report
 
 #PIPELINE Y PRE PROCESAMIENTO
 
