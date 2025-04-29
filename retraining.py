@@ -6,8 +6,9 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+
 
 #PIPELINE Y PRE PROCESAMIENTO
 
