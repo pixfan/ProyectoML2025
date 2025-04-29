@@ -1,0 +1,97 @@
+name: CI model to dockerhub
+
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+
+jobs:
+  retraining_model:
+    runs-on: ubuntu-latest
+    container: docker://dvcorg/cml:latest
+    env:
+      repo_token: ${{ secrets.GITHUBTOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+
+      - name: Install requirements
+        run:
+          pip3 install -r requirements.txt
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'ap-southeast-1'
+
+      - name: Download data
+        run: |
+            python3 descargar_data.py
+  
+
+      - name: Execute the training model
+        run: |
+          python3 retraining.py
+
+      - name: Generating report
+      
+        run: |
+          echo "## Model metrics" > report.md
+          cat metrics.txt >> report.md
+    
+          cml-send-comment report.md
+
+
+
+  build_docker_image:
+    needs: retraining_model
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check the repo
+        uses: actions/checkout@v2
+
+      - name: Login to dockerhub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build docker image
+
+        run: docker build -t hipertensionv1gsp .
+
+
+      - name: Docker tag
+        run: docker tag hipertensionv1gsp samcfer/hipertensionv1gsp:latest
+
+
+      - name: Docker push to Dockerhub
+        run: docker push samcfer/hipertensionv1gsp 
+
+      - name: Login into the server
+        run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login -u '${{ secrets.DOCKER_USERNAME }}' --password-stdin
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker login --u '${{secrets.DOCKER_USERNAME}}' --password-stdin '${{secrets.DOCKER_PASSWORD}}'
+            if docker ps --all | grep hipertensionv1gsp; then
+              docker stop hipertensionv1gsp
+              docker rm hipertensionv1gsp
+            fi
+            
+            docker pull ${{ secrets.DOCKER_USERNAME }}/hipertensionv1gsp
+            docker run -d --name hipertensionv1gsp -p 80:8501 samcfer/hipertensionv1gsp
