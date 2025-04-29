@@ -8,24 +8,6 @@
 Este proyecto desarrolla una solución de Machine Learning que predice el riesgo de hipertensión arterial basado en datos clínicos. Utiliza un modelo de AdaBoost entrenado sobre el dataset Hipertension_Arterial_Mexico.csv.
 Se incluyen scripts para reentrenamiento automático con una interfaz gráfica web usando Streamlit y pipelines de CI/CD para automatizar el flujo de trabajo.
 
- ## Estructura del repositorio
-
-PROYECTO/
-├── .github/workflows/main.yml       # Pipeline de CI/CD con GitHub Actions
-├── model/Adaboost.pkl                # Modelo entrenado
-├── app.py                            # Aplicación web con Streamlit
-├── main.py                           # API con FastAPI para consumo del modelo
-├── retraining.py                     # Script de reentrenamiento del modelo
-├── descargar_data.py                 # Script para descarga de datos
-├── Dockerfile                        # Dockerización del proyecto
-├── Hipertension_Arterial_Mexico.csv  # Dataset base
-├── metrics.txt                       # Resultados de evaluación del modelo
-├── .deepsource.toml                  # Configuración de análisis de código (DeepSource)
-├── requirements.txt                  # Dependencias del proyecto
-├── README.md                         # Este documento
-├── LICENSE                           # Licencia del proyecto
-└── otros archivos de configuración (.gitignore, .dockerignore, etc.)
-
 
 ## La interfaz estará disponible en el navegador.
 
