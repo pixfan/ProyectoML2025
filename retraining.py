@@ -12,7 +12,7 @@ from sklearn.metrics import accuracy_score, classification_report
 #PIPELINE Y PRE PROCESAMIENTO
 
 
-df = pd.read_csv(r"C:\Users\samue\PycharmProjects\ProyectoML2025\Hipertension_Arterial_Mexico.csv")
+df = pd.read_csv(r".\data\Hipertension_Arterial_Mexico.csv")
 df = df[df.masa_corporal != 1 ]
 X = df.drop(columns=['FOLIO_I',"riesgo_hipertension"])
 y = df["riesgo_hipertension"]
