@@ -85,3 +85,4 @@ Despliegue automático a servidor en la nube.
 Se realiza análisis estático y control de calidad mediante:
 
 DeepSource configurado en .deepsource.toml.
+No code was selected to improve.
